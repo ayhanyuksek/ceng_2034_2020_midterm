@@ -1,0 +1,132 @@
+\documentclass[onecolumn]{article}
+%\usepackage{url}
+%\usepackage{algorithmic}
+\usepackage[a4paper]{geometry}
+\usepackage{datetime}
+\usepackage[margin=2em, font=small,labelfont=it]{caption}
+\usepackage{graphicx}
+\usepackage{mathpazo} % use palatino
+\usepackage[scaled]{helvet} % helvetica
+\usepackage{microtype}
+\usepackage{amsmath}
+\usepackage{subfigure}
+% Letterspacing macros
+\newcommand{\spacecaps}[1]{\textls[200]{\MakeUppercase{#1}}}
+\newcommand{\spacesc}[1]{\textls[50]{\textsc{\MakeLowercase{#1}}}}
+
+\usepackage{epsfig}
+
+\title{\spacecaps{Assignment Report: Process and Thread Implementation}\\ \normalsize \spacesc{CENG2034, Operating Systems} }
+
+\author{Ayhan YÜKSEK\\ayhanyuksek@posta.mu.edu.tr\\}
+%\date{\today\\\currenttime}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+
+\section{Introduction}
+In this assignment, we created a python script. The task of this script was to retrieve addresses from the address list sequentially and check if they were working. First of all, we ran this script we created normally and then ran it using the multithreading method. The purpose of these trials was to see in which case the script would run and complete faster. Thanks to this assignment, we will grasp in what situations the multithreading method is advantageous and what these advantages are .
+\section{Assignments}
+In this assignment, 4 different tasks were requested from us.These tasks are:\newline
+1-) Write a function in python script that checks if internet addresses are working.\newline\newline
+    -- \emph{Firstly, I import python request library to write this function. And using this library, I wrote the following code:}\bigbreak
+             \includegraphics[scale= .6]{request_code.png}\newline
+2-) Print PID of python script\newline\newline
+    --\emph{ In this task, we are asked for the pid (process id-number) of our script. We can retrieve this data using the python's "OS" library.And with} os.getpid() \bigbreak
+             \includegraphics[scale= .6]{pidnum.png}\newline
+             3-) Print loadavg of functions.\newline
+
+--\emph{We can think of these values as CPU counters that show the process load. We can retrieve this data using the python's "OS" library.}\bigbreak
+            \includegraphics[scale=.8]{loadavg.png}\newline
+
+4-) Take and print “5 min. Loadavg ”value and the number of cpu cores and print. And compare the two values.\bigbreak
+
+--\emph{In this task, we take the 5 min. loadavg value and compare it with the number of cores of the CPU. If the difference between them exceeds 1, the script ends. because it is undesirable to exceed 1. In this task, we can implement it with a code like the one below:}\bigbreak
+            \includegraphics[scale=.8]{avgVScpucore.png}
+
+
+
+
+
+
+\section{Results}
+
+\lipsum
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=1.07\textwidth]{normally.png} % first figure itself
+        \caption{process implementation}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=1.1\textwidth]{multithreading.png} % second figure itself
+        \caption{Multithreaded implementation}
+    \end{minipage}
+\end{figure}
+\lipsum
+\bigbreak
+\bigbreak
+\bigbreak
+We can run our function in the script in two ways. The first is to run our function once per element of our array, as we see in figure 1. The second is to create a thread for each element of our list and start our threads.\newline
+Although it may seem costly in two transactions at first glance, we can summarize the difference between them as follows.
+\bigbreak
+\emph{-- In Figure 1 will not switch to another transaction until one transaction is finished. For example, arr[1] will not work before the function ends for arr[0].}\bigbreak
+
+\emph{-- But in figure 2, since we are doing multithreaded, one process can run in another process when it starts running. This is the advantage of multi-threaded. For example, when our function starts working for arr[0], while function is waiting for a response from arr[0], arr[1] starts working.}
+\bigbreak
+\bigbreak
+
+In order to better understand the difference between them, we need to examine the output of both situations. The important thing in the output is the time required for the script to finish.
+We can print the output time with the \emph{'time'} command.\bigbreak
+
+\lipsum
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=0.99\textwidth]{normalOutput.jpeg} % first figure itself
+        \caption{process implementation}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \includegraphics[width=1.35\textwidth]{multithreaded.jpeg} % second figure itself
+        \caption{Multithreaded implementation}
+    \end{minipage}
+\end{figure}
+\lipsum
+\bigbreak
+\bigbreak
+
+As you can see in the diagrams above, real time in figure 3 is 2.184s and real time in figure 4 is 0.638s.
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+
+
+\section{Conclusion}
+As a result, we have a better understanding of the advantages of multithreaded processing while performing the tasks given in this assignment. When we run our function as in figure 1, we found that the function works for the first element of the list and goes to the second process after it is finished.This can be extremely costly. Likewise, thanks to the multithreaded application in figure2,we were able to run our function faster.So why? This is due to the feature of the thread. According to this feature,when first thread starts working, while first thread is waiting for  response from function, another thread starts working.\newline
+In addition, the fact that multithreaded works faster than normal showed us that our script is not a cpu bound code.If more than one thread uses a common variable, access control of this variable is provided by Global Interpreter Lock. GIL causes only one to work at any given time, no matter how thread.So it might not make sense to make multithreaded in cpu bound codes.
+\bigbreak
+\bigbreak
+\bigbreak
+\bigbreak
+\textbf{\spacecaps{Github Account:}}\bigbreak
+
+\textbf{\author{https://github.com/ayhanyuksek\\}}
+
+
+
+
+
+
+
+\end{document}
